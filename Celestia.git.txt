@@ -1,0 +1,62 @@
+Celestia | Light 0.2.0 clean install
+  Install dependencies:
+  # Update if needed
+sudo apt update && sudo apt upgrade -y
+
+# Insall packages
+sudo apt install curl tar wget clang pkg-config libssl-dev jq build-essential bsdmainutils git make ncdu -y
+
+# Install GO 1.17.2
+cd $HOME
+ver="1.17.2"
+wget "https://golang.org/dl/go$ver.linux-amd64.tar.gz"
+sudo rm -rf /usr/local/go
+sudo tar -C /usr/local -xzf "go$ver.linux-amd64.tar.gz"
+rm "go$ver.linux-amd64.tar.gz"
+echo "export PATH=$PATH:/usr/local/go/bin:$HOME/go/bin" >> $HOME/.bash_profile
+source $HOME/.bash_profile
+go version
+
+# OUTPUT 
+# go version go1.17.2 linux/amd64
+  
+   Build celestia :
+cd $HOME
+rm -rf celestia-node
+git clone https://github.com/celestiaorg/celestia-node.git
+cd celestia-node
+git checkout v0.2.0
+make install
+
+celestia version
+# Semantic version: v0.2.0
+  
+   Light Node Start :
+# init 
+celestia light init
+
+# add bootstrap peers
+BootstrapPeers="[\"/dns4/andromeda.celestia-devops.dev/tcp/2121/p2p/12D3KooWKvPXtV1yaQ6e3BRNUHa5Phh8daBwBi3KkGaSSkUPys6D\", \"/dns4/libra.celestia-devops.dev/tcp/2121/p2p/12D3KooWK5aDotDcLsabBmWDazehQLMsDkRyARm1k7f1zGAXqbt4\", \"/dns4/norma.celestia-devops.dev/tcp/2121/p2p/12D3KooWHYczJDVNfYVkLcNHPTDKCeiVvRhg8Q9JU3bE3m9eEVyY\"]"
+
+sed -i -e "s|BootstrapPeers *=.*|BootstrapPeers = $BootstrapPeers|" $HOME/.celestia-light/config.toml
+ 
+  Create and run service :
+sudo tee /etc/systemd/system/celestia-light.service > /dev/null <<EOF
+[Unit]
+  Description=celestia-light
+  After=network-online.target
+[Service]
+  User=$USER
+  ExecStart=$(which celestia) light start
+  Restart=on-failure
+  RestartSec=10
+  LimitNOFILE=4096
+[Install]
+  WantedBy=multi-user.target
+EOF
+
+               sudo systemctl enable celestia-light
+               sudo systemctl daemon-reload
+Check height : sudo systemctl restart celestia-light && journalctl -u celestia-light -f -o cat  , https://celestia.observer/
+
+# Press CTRL+C to interrupt logs output
