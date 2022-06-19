@@ -59,4 +59,10 @@ EOF
                sudo systemctl daemon-reload
 Check height : sudo systemctl restart celestia-light && journalctl -u celestia-light -f -o cat  , https://celestia.observer/
 
+sudo systemctl stop celestia-light
+sudo systemctl disable celestia-light
+rm -rf ~/.local/share/subspace*
+rm -rf /etc/systemd/system/subspaced*
+rm -rf /usr/local/bin/subspace*
+
 # Press CTRL+C to interrupt logs output
