@@ -61,6 +61,8 @@ Check height : sudo systemctl restart celestia-light && journalctl -u celestia-l
 
 sudo systemctl stop celestia-light
 sudo systemctl disable celestia-light
-rm -rf /etc/systemd/system/celestia-light*
+rm -rf /etc/systemd/system/celestia-light/
+
+systemctl stop quicksilverd && systemctl disable quicksilverd && rm -rf $HOME/.quicksilverd/
 
 # Press CTRL+C to interrupt logs output
