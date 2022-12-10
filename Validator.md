@@ -206,6 +206,7 @@ rm -rf /etc/systemd/system/celestia-appd.service
 rm -rf $HOME/go/bin/celestia-appd
 rm -rf /root/celestia-app/
 rm -rf /root/.celestia-app/
+sed -i "/CELESTIA_/d" $HOME/.bash_profile
 ```
 # some useful commands
 - check balance 
@@ -219,7 +220,11 @@ celestia-appd keys show YOUR_WALLET_NAME --bech=acc
 example :
 celestia-appd keys show tho248 --bech=acc
 ```
-- show validarto wallet 
+- deleta wallet
+````
+celestia-appd keys delete $CELESTIA_WALLET
+````
+- show validator wallet 
 ```
 celestia-appd keys show YOUR_WALLET_NAME --bech=val      
 example :
@@ -229,10 +234,32 @@ celestia-appd keys show thonguyen --bech=val
 ```
  celestia-appd status 2>&1 | jq .NodeInfo
 ```
--  Delegate to a Validator 
+- check validator info
+````
+celestia-appd status 2>&1 | jq .ValidatorInfo
+````
+- unjail
 ```
-celestia-appd tx staking delegate celestiavaloper1q3v5cugc8cdpud87u4zwy0a74uxkk6u43cv6hd 1000000utia --from=$VALIDATOR_WALLET --chain-id=mamaki -y
+celestia-appd tx slashing unjail --broadcast-mode=block --from=<WALLET-NAME> --chain-id=mamaki --node="http://127.0.0.1:23657" --gas=auto -y
 ```
+- Edit validator
+````
+celestia-appd tx staking edit-validator \
+  --moniker=$NODENAME \
+  --identity=<your_keybase_id> \
+  --website="<your_website>" \
+  --details="<your_validator_description>" \
+  --chain-id=$CELESTIA_CHAIN_ID \
+  --from=$CELESTIA_WALLET
+  ````
+- your node peers
+````
+echo $(celestia-appd tendermint show-node-id)'@'$(curl -s ifconfig.me)':'$(cat $HOME/.celestia-app/config/config.toml | sed -n '/Address to listen for incoming connection/{n;p;}' | sed 's/.*://; s/".*//')
+````
+- get currently conected peers lis
+````
+curl -sS http://localhost:${CELESTIA_PORT}657/net_info | jq -r '.result.peers[] | "\(.node_info.id)@\(.remote_ip):\(.node_info.listen_addr)"' | awk -F ':' '{print $1":"$(NF)}'
+````
 - Delegate to validator from a wallet
 ```
 celestia-appd tx staking delegate YOUR_VALIDATOR_ADDRESS 10000000utia --from=YOUR_WALLETNAME --chain-id=mamaki --keyring-backend test  --node="http://127.0.0.1:23657" -y
@@ -240,14 +267,26 @@ celestia-appd tx staking delegate YOUR_VALIDATOR_ADDRESS 10000000utia --from=YOU
  Example:
  celestia-appd tx staking delegate celestiavaloper1s5cf5qeu9rx3reajvyvd2kr54hc79379hpqmvy 10000000utia --from=thonguyen --chain-id=mamaki --keyring-backend test --node https://rpc-mamaki.pops.one/ -y
 ```
-- unjail
-```
-celestia-appd tx slashing unjail --broadcast-mode=block --from=<WALLET-NAME> --chain-id=mamaki --node="http://127.0.0.1:23657" --gas=auto -y
-```
+- Redelegate stake to another validator
+````
+celestia-appd tx staking redelegate <srcValidatorAddress> <destValidatorAddress> 1000000utia --from $CELESTIA_WALLET --chain-id $CELESTIA_CHAIN_ID --gas auto --gas-adjustment 1.5
+````
 - send
 ```
 celestia-appd tx bank send celestia1d7y9ray68r94khyz389dx5jhfygpg5hrt93vcc celestia1s5cf5qeu9rx3reajvyvd2kr54hc79379j7zz6z 1000000utia --chain-id mamaki  --from thonguyen --gas-prices 0.1utia --gas-adjustment 1.5 --gas auto -y
 ```
+- vote
+````
+celestia-appd tx gov vote 1 yes --from $CELESTIA_WALLET --chain-id $CELESTIA_CHAIN_ID
+````
+- Withdraw all rewards
+````
+celestia-appd tx distribution withdraw-all-rewards --from $CELESTIA_WALLET --chain-id $CELESTIA_CHAIN_ID --gas auto --gas-adjustment 1.3
+````
+- Withdraw rewards with commision
+````
+celestia-appd tx distribution withdraw-rewards $CELESTIA_VALOPER_ADDRESS --from $CELESTIA_WALLET --commission --chain-id $CELESTIA_CHAIN_ID --gas auto --gas-adjustment 1.3
+````
 - check chain-id in genesis.json and client.toml
 ```
 cat .celestia-app/config/genesis.json | grep chain_id
