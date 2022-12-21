@@ -1,7 +1,8 @@
 # Stop celestia-appd
+
 ````
 sudo systemctl stop celestia-appd
-```
+````
 
 # edit chain in bash_profile to mocha
 
@@ -9,14 +10,14 @@ sudo systemctl stop celestia-appd
 vi $HOME/.bash_profile
 ````
 # set necessary vars
-```
+````
 CHAIN_ID="mocha"
 NODE_MONIKER=$(cat "$HOME/.celestia-app/config/config.toml" | grep moniker | grep -oP 'moniker = "\K[^"]+')
-```
+````
 # backup priv_validator_key.json from mamaki (optional)
-```
+````
 cp $HOME/.celestia-app/config/priv_validator_key.json $HOME/priv_validator_key.json.backup
-```
+````
 # remove mamaki testnet data
 ````
 rm -rf $HOME/.celestia-app
@@ -61,7 +62,7 @@ wget -O - https://snaps.qubelabs.io/celestia/${SNAP_NAME} | tar xf - \
     -C ~/.celestia-app/data/
 ````
 # set seed , peer ...
-```
+````
 curl -s https://raw.githubusercontent.com/celestiaorg/networks/master/mocha/genesis.json > $HOME/.celestia-app/config/genesis.json
 sha256sum $HOME/.celestia-app/config/genesis.json # 05ef265e16f37d1f5aa2ec884be3782c38d71e59a6d57957235c5ca433aa8e05
 
