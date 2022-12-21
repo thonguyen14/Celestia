@@ -80,11 +80,22 @@ sed -i 's|pruning-interval = "0"|pruning-interval = "17"|g' $HOME/.celestia-app/
 ````
 # restore priv_validator_key.json from mamaki (optional)
 mv $HOME/priv_validator_key.json.backup $HOME/.celestia-app/config/priv_validator_key.json
-# add key
-````
-celestia-appd keys add <NAME-ADD> --recover
-````
 # RESTART
 ````
 sudo systemctl restart celestia-appd && journalctl -u celestia-appd -f -o cat
+````
+# add key
+- validator wallet
+````
+celestia-appd keys add <NAME-ADD> --recover
+````
+- ORCHESTRATOR wallet
+````
+celestia-appd keys add orchestrator
+````
+- Create ETH address in metamask
+
+# create validator
+````
+celestia-appd tx staking create-validator --amount=1000000utia --pubkey=$(celestia-appd tendermint show-validator) --moniker=<MONIKER> --chain-id=mocha --commission-rate=0.07 --commission-max-rate=0.2 --commission-max-change-rate=0.05 --min-self-delegation=1 --from=<VALIDATOR-WALLET-ADD> --evm-address=<METAMASK-ADD> --orchestrator-address=<ORCHESTRATOR-wallet-ADD> --node="....." --identity="...." --keyring-backend=test --gas=auto --gas-adjustment=1.5 --fees=1500utia -y
 ````
