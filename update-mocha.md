@@ -1,8 +1,10 @@
-# 
+# Stop celestia-appd
 ````
 sudo systemctl stop celestia-appd
 ```
+
 # edit chain in bash_profile to mocha
+
 ````
 vi $HOME/.bash_profile
 ````
