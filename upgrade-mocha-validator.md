@@ -99,7 +99,7 @@ celestia-appd keys add orchestrator
 - Create ETH address in metamask
 # check the balance
 ````
-celestia-appd q bank balances $(celestia-appd keys show wallet -a)
+celestia-appd q bank balances $(celestia-appd keys show <NAME-ADD> -a)
 celestia-appd q bank balances $(celestia-appd keys show orchestrator -a)
 ````
 
