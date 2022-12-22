@@ -1,3 +1,4 @@
+# if you are starting to install a new node, follow the link https://docs.celestia.org/nodes/mocha-testnet . if you have installed node on mamaki do the upgrade following the guide below.
 # Stop celestia-appd
 
 ````
@@ -79,7 +80,9 @@ sed -i 's|pruning-keep-recent = "0"|pruning-keep-recent = "100"|g' $HOME/.celest
 sed -i 's|pruning-interval = "0"|pruning-interval = "17"|g' $HOME/.celestia-app/config/app.toml
 ````
 # restore priv_validator_key.json from mamaki (optional)
+````
 mv $HOME/priv_validator_key.json.backup $HOME/.celestia-app/config/priv_validator_key.json
+````
 # RESTART
 ````
 sudo systemctl restart celestia-appd && journalctl -u celestia-appd -f -o cat
@@ -94,6 +97,11 @@ celestia-appd keys add <NAME-ADD> --recover
 celestia-appd keys add orchestrator
 ````
 - Create ETH address in metamask
+# check the balance
+````
+celestia-appd q bank balances $(celestia-appd keys show wallet -a)
+celestia-appd q bank balances $(celestia-appd keys show orchestrator -a)
+````
 
 # create validator
 ````
