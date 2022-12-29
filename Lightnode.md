@@ -87,10 +87,6 @@ systemctl status celestia-lightd
 journalctl -u celestia-lightd.service -f -o cat
 ```
 
-sudo systemctl stop celestia-light
-sudo systemctl disable celestia-light
-rm -rf /etc/systemd/system/celestia-light/
-
 # delete node
 ```
 sudo systemctl stop celestia-lightd && sudo systemctl disable celestia-lightd
