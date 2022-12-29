@@ -49,7 +49,7 @@ $ celestia light init
 2022-12-19T21:45:24.591Z        INFO    node    nodebuilder/init.go:50  Saving config   {"path": "/root/.celestia-light-mocha/config.toml"}
 2022-12-19T21:45:24.592Z        INFO    node    nodebuilder/init.go:51  Node Store initialized
 ````
-- Start the light node
+- Start the light node ( optionally start with keys or with systemd)
 ````
 celestia light start --core.ip <ip-address> --core.grpc.port <port> --gateway --gateway.addr <ip-address> --gateway.port <port> --p2p.network mocha
 ````
