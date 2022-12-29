@@ -237,6 +237,9 @@ celestia-appd keys show thonguyen --bech=val
 - check validator info
 ````
 celestia-appd status 2>&1 | jq .ValidatorInfo
+
+#example 
+celestia-appd q staking validator $(celestia-appd keys show wtho --bech val -a) --node="http://127.0.0.1:23657"
 ````
 - unjail
 ```
