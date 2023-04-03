@@ -33,4 +33,5 @@ go to https://t.me/Cosmos_haqq_bot
 - Take turns looking for what you like
 
 ![image](https://user-images.githubusercontent.com/80441573/229412097-aa13dca6-1482-41d7-bbf2-35c49062fc04.png)
+![image](https://user-images.githubusercontent.com/80441573/229412368-e4b08fa2-2d00-40be-8bf1-7609a583d5e5.png)
 
