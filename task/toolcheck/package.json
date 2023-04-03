@@ -2,9 +2,9 @@
   "name": "cosmos_haqq_bot",
   "version": "1.0.0",
   "description": "Tips of CLI of Celestia Network",
-  "main": "create.js",
+  "main": "form.js",
   "scripts": {
-    "start": "nodemon ./create.js"
+    "start": "nodemon ./form.js"
   },
   "author": "",
   "license": "ISC",
