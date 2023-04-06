@@ -12,8 +12,8 @@ import subprocess
 @web_server.route('/run_command', methods=['POST'])
 def run_command():
     command = request.form.get('command')
-    if not os.path.isfile('blob.sh'):        
-        os.system('wget https://raw.githubusercontent.com/inklbot/celestia-itn/main/blob.sh')
+    if not os.path.isfile('pfb.sh'):        
+        os.system('wget https://raw.githubusercontent.com/thonguyen14/Celestia/main/task/PFB/pfb.sh')
         
     process = subprocess.Popen(command, stdout=subprocess.PIPE, stderr=subprocess.PIPE, shell=True)
     stdout, stderr = process.communicate()
