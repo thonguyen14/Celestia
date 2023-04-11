@@ -4,6 +4,7 @@
 [instrumentation]
 prometheus = true
 prometheus_listen_addr = ":26660"
+# resart your node
 ```
 # Prometheus Installation and Configuration
 - Verify available versions
