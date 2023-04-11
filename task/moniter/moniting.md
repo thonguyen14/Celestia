@@ -46,7 +46,8 @@ sudo nano /etc/prometheus/prometheus.yml
   
   - job_name: node  
     static_configs:  
-      - targets: ['localhost:9100']  
+      - targets: ['localhost:9100']
+  #ctrl+X --> Y -->enter
 ```
 - Set the user and group ownership on the configuration file
 ```
