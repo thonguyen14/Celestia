@@ -77,6 +77,7 @@ ExecStart=/usr/local/bin/prometheus \
 WantedBy=multi-user.target
 EOF
 
+sudo systemctl daemon-reload
 sudo systemctl enable prometheus
 sudo systemctl start prometheus
 sudo systemctl status prometheus
