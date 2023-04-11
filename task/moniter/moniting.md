@@ -37,11 +37,11 @@ sudo nano /etc/prometheus/prometheus.yml
     static_configs:  
     - targets: ['localhost:9091']  
   
-  - job_name: 'Agoric-Validator'  
+  - job_name: 'Celestia-light'  
     static_configs:  
       - targets: ['localhost:26660']  
         labels:  
-          group: 'Validator'  
+          group: 'light'  
   
   - job_name: node  
     static_configs:  
