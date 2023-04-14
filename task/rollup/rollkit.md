@@ -1,5 +1,6 @@
 **make sure you have Celestia light node installed. Instructions link [here](https://docs.celestia.org/nodes/light-node/)
-**instructions from team celeatia [here](https://rollkit.dev/docs/tutorials/gm-world/)
+
+**instructions rollkit from team celeatia [here](https://rollkit.dev/docs/tutorials/gm-world/)
 # install prerequisites
 ## Install Docker
 ```
