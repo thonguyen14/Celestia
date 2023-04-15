@@ -136,6 +136,7 @@ cd
 cd gm/cmd/gmd/cmd
 vi root.go
 ```
+```
 cd gm
 wget -O init-testnet.sh https://raw.githubusercontent.com/rollkit/docs/main/docs/scripts/gm/init-testnet.sh && chmod +x init-testnet.sh
 cd $HOME
@@ -146,7 +147,7 @@ cd
 screen -S rollup
 cd gm
 ./init-testnet.sh
-````
+```
 - check query
 ```
 cd $HOME
