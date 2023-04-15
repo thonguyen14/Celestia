@@ -32,17 +32,17 @@ docker run --platform linux/amd64 -p 26650:26657 -p 16659:16659 ghcr.io/celestia
 #check
 sudo docker logs -f CONTAINER_ID_or_NAME
 ```
-- useful commands
- - check balance
+- **useful commands**
+ - *check balance*
  ```
  curl -s -X GET http://0.0.0.0:26659/balance | jq
  ```
-  - Find the Container ID
+  - *Find the Container ID*
   ```
   docker ps
   docker ps -a  (include stop the container)
   ```
-   - stop , start , delete docker CONTAINER 
+   - *stop , start , delete docker CONTAINER* 
    ```
    docker stop CONTAINER_ID_or_NAME
    docker start CONTAINER_ID_or_NAME
@@ -54,11 +54,14 @@ curl https://get.ignite.com/cli! | bash
 #check version
 ignite version
 ```
+![image](https://user-images.githubusercontent.com/80441573/232179338-05f19800-55e2-46ce-a56e-64918791c09b.png)
+
 ```
 cd $HOME
 screen -S GM
 ignite scaffold chain gm --address-prefix gm
 ```
+![image](https://user-images.githubusercontent.com/80441573/232179552-b7936138-33ab-481b-83b5-d87c5449d326.png)
 ***crrl+a+d --> enter***
 # To swap out Tendermint for Rollkit
 ```
@@ -70,6 +73,8 @@ go mod download
 ```
 # Start your rollup
 ```
+cd
+screen -S rollkit
 cd gm
 wget -O init-local.sh https://raw.githubusercontent.com/rollkit/docs/main/docs/scripts/gm/init-local.sh && chmod +x init-local.sh && ./init-local.sh
 ```
@@ -100,16 +105,46 @@ screen -S gm-world
 cd gm
 ignite scaffold query gm --response text
 ```
+![image](https://user-images.githubusercontent.com/80441573/232205794-95ebb1a4-9b9d-4e73-87ee-0b6d81323f69.png)
+
 ctrl+a+d--> enter
+
 # Start your sovereign rollup
+## edit query_gm.go
+```
+cd gm/x/gm/keeper
+vi query_gm.go
+```
+#enter the below
+```
+func (k Keeper) Gm(goCtx context.Context, req *types.QueryGmRequest) (*types.QueryGmResponse, error) {
+    if req == nil {
+        return nil, status.Error(codes.InvalidArgument, "invalid request")
+    }
+    ctx := sdk.UnwrapSDKContext(goCtx)
+    _ = ctx
+    return &types.QueryGmResponse{Text: "gm world!"}, nil
+}
+```
 **Before starting our rollup, we'll need to find and change *FlagIAVLFastNode* to *FlagDisableIAVLFastNode***
 in gm/cmd/gmd/cmd/root.go
+baseapp.SetIAVLDisableFastNode(cast.ToBool(appOpts.Get(server.FlagDisableIAVLFastNode)))
+
 baseapp.SetIAVLDisableFastNode(cast.ToBool(appOpts.Get(server.FlagDisableIAVLFastNode))),
+```
+cd
+cd gm/cmd/gmd/cmd
+vi root.go
 ```
 cd gm
 wget -O init-testnet.sh https://raw.githubusercontent.com/rollkit/docs/main/docs/scripts/gm/init-testnet.sh && chmod +x init-testnet.sh
 cd $HOME
-rm -r go/bin/gmd && rm -rf .gm
+sudo rm -r go/bin/gmd && rm -rf .gm
+screen -x rollkit
+ctrl+c
+cd
+screen -S rollup
+cd gm
 ./init-testnet.sh
 ````
 - check query
