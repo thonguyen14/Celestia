@@ -62,7 +62,8 @@ screen -S GM
 ignite scaffold chain gm --address-prefix gm
 ```
 ![image](https://user-images.githubusercontent.com/80441573/232179552-b7936138-33ab-481b-83b5-d87c5449d326.png)
-***crrl+a+d --> enter***
+
+***crrl+a+d **
 # To swap out Tendermint for Rollkit
 ```
 cd gm
@@ -107,7 +108,7 @@ ignite scaffold query gm --response text
 ```
 ![image](https://user-images.githubusercontent.com/80441573/232205794-95ebb1a4-9b9d-4e73-87ee-0b6d81323f69.png)
 
-ctrl+a+d--> enter
+ctrl+a+d
 
 # Start your sovereign rollup
 ## edit query_gm.go
@@ -126,16 +127,14 @@ func (k Keeper) Gm(goCtx context.Context, req *types.QueryGmRequest) (*types.Que
     return &types.QueryGmResponse{Text: "gm world!"}, nil
 }
 ```
-**Before starting our rollup, we'll need to find and change *FlagIAVLFastNode* to *FlagDisableIAVLFastNode***
-in gm/cmd/gmd/cmd/root.go
-baseapp.SetIAVLDisableFastNode(cast.ToBool(appOpts.Get(server.FlagDisableIAVLFastNode)))
-
+## we'll need to find and change *FlagIAVLFastNode* to *FlagDisableIAVLFastNode in gm/cmd/gmd/cmd/root.go***
 baseapp.SetIAVLDisableFastNode(cast.ToBool(appOpts.Get(server.FlagDisableIAVLFastNode))),
 ```
 cd
 cd gm/cmd/gmd/cmd
 vi root.go
 ```
+## run rollup
 ```
 cd gm
 wget -O init-testnet.sh https://raw.githubusercontent.com/rollkit/docs/main/docs/scripts/gm/init-testnet.sh && chmod +x init-testnet.sh
@@ -147,14 +146,18 @@ cd
 screen -S rollup
 cd gm
 ./init-testnet.sh
+#exit
+ctrl+a+d
 ```
 - check query
 ```
 cd $HOME
-screen -S query
+cd gm
 gmd q gm gm
 #output
 text: gm world!
 ```
+![image](https://user-images.githubusercontent.com/80441573/232232252-febefaf4-6118-47a3-90db-f459a2e8e50f.png)
+
 **OK OK**
 
