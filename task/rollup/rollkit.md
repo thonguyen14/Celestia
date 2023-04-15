@@ -2,6 +2,11 @@
 
 **instructions rollkit from team celeatia [here](https://rollkit.dev/docs/tutorials/gm-world/)
 # install prerequisites
+## install extras
+```
+sudo apt update && sudo apt upgrade -y
+sudo apt install curl tar wget clang pkg-config libssl-dev jq build-essential bsdmainutils git make ncdu -y
+```
 ## Install Docker
 ```
 wget -O get-docker.sh https://get.docker.com 
@@ -24,7 +29,8 @@ go version
 # run the local-celestia-devnet whit docker
 ```
 docker run --platform linux/amd64 -p 26650:26657 -p 16659:16659 ghcr.io/celestiaorg/local-celestia-devnet:main
-sudo docker logs -f jolly_keldysh
+#check
+sudo docker logs -f CONTAINER_ID_or_NAME
 ```
 - useful commands
  - check balance
@@ -45,6 +51,7 @@ sudo docker logs -f jolly_keldysh
 # Install Ignite CLI
 ```
 curl https://get.ignite.com/cli! | bash
+#check version
 ignite version
 ```
 ```
