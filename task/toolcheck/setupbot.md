@@ -1,3 +1,4 @@
+**Instructions for setting up telegram bot to check useful CLI commands for Celestia network**
 # Install npm
 ```
 npm install -g npm@9.6.3
