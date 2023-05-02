@@ -16,6 +16,7 @@ wget -O form.js https://raw.githubusercontent.com/thonguyen14/Celestia/main/task
 ```
 # Start BOT
 ```
+cd
 which screen
 #if not have screen , run the current command to install
 apt install screen
