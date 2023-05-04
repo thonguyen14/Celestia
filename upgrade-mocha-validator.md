@@ -1,4 +1,4 @@
-# if you are starting to install a new node, follow the link https://docs.celestia.org/nodes/mocha-testnet . if you have installed node on mamaki do the upgrade following the guide below.
+**if you are starting to install a new node, follow the link https://docs.celestia.org/nodes/mocha-testnet . if you have installed node on mamaki do the upgrade following the guide below**
 # Stop celestia-appd
 
 ````
