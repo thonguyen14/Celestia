@@ -12,8 +12,8 @@ cd sei-chain
 cat go.mod | grep "github.com/cosmos/cosmos-sdk" | awk '{print $2}' | awk -F: '{print $1"."$2}'
 ```
 - Select latest Rollkit SDK version from the [link](https://github.com/rollkit/cosmos-sdk/tags) which is consistent with your $SDK_VERSION
-#If sdk version=0.45 => select v0.45.10-rollkit-v0.7.3-no-fraud-proofs
-#If sdk version=0.46 => select v0.46.7-rollkit-v0.7.3-no-fraud-proofs
+  - If sdk version=0.45 => select v0.45.10-rollkit-v0.7.3-no-fraud-proofs
+  - If sdk version=0.46 => select v0.46.7-rollkit-v0.7.3-no-fraud-proofs
 
 # Edit Cosmos-SDK appchain to be Cosmos SDK rollup (Suppose $SDK_VERSION=v0.46.7)
 ```
