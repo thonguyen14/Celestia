@@ -75,12 +75,15 @@ echo $NAMESPACE_ID
 ```
 - ***Query the DA Layer start height, in this case we are querying blockheight from RPC of a consensus fullnode on Celestia-Blockspacerace***
 #You can check public of Celestia RPC at [here](https://docs.celestia.org/nodes/blockspace-race/#rpc-endpoints)
+
 ```
 DA_BLOCK_HEIGHT=$(curl https://rpc-blockspacerace.pops.one/block | jq -r '.result.block.header.height')
 echo $DA_BLOCK_HEIGHT
 ```
 - ***start a sequencer of rollkit chain***
+
 #If DA node and Rollup sequencer are on different server change http://localhost:26659 to http://YOUR_PUB_IP:26659
+
 ```
 seid start --rollkit.aggregator true --rollkit.block_time 2.35s --rollkit.da_block_time 2.35s --rollkit.da_layer celestia --rollkit.da_config='{"base_url":"http://localhost:26659","timeout":60000000000,"fee":100,"gas_limit":100000}' --rollkit.namespace_id $NAMESPACE_ID  --rollkit.da_start_height $DA_BLOCK_HEIGHT --p2p.laddr "0.0.0.0:26656" --p2p.seed_mode --log_level debug
 ```
