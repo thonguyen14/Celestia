@@ -1,5 +1,5 @@
 **Instructions for setting up Cosmos SDK Appchain L1 into Cosmos SDK Rollup on Celestia . The scripts for this tutorial are built for Celestia's Blockspacerace testnet**
-**install Celestia light node , Instructions link [here](https://docs.celestia.org/nodes/light-node/)
+- **install Celestia light node , Instructions link [here](https://docs.celestia.org/nodes/light-node/)
 # firts download repo of Cosmos SDK Appchain L1 , here I take the example Sei network
 ```
 git clone https://github.com/sei-protocol/sei-chain.git
