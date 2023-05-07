@@ -30,10 +30,11 @@ npm i && npm start
 go to https://t.me/Cosmos_haqq_bot
 - Start the bot with the command /start , then select the node type you want to support
 
-![image](https://user-images.githubusercontent.com/80441573/229411886-fee14836-2888-4a23-aed2-5b5945a1d672.png)
+![image](https://user-images.githubusercontent.com/80441573/236667138-ce51dae1-6a51-4c24-89a0-84da55e85a17.png)
 
 - Take turns looking for what you like
 
-![image](https://user-images.githubusercontent.com/80441573/229412097-aa13dca6-1482-41d7-bbf2-35c49062fc04.png)
-![image](https://user-images.githubusercontent.com/80441573/229412368-e4b08fa2-2d00-40be-8bf1-7609a583d5e5.png)
+![image](https://user-images.githubusercontent.com/80441573/236667193-a9871afb-cffa-4ca3-ba74-6ad49e999ac3.png)
+![image](https://user-images.githubusercontent.com/80441573/236667226-3cf6f794-6e01-43e5-934d-241fc0260ec1.png)
+![image](https://user-images.githubusercontent.com/80441573/236667250-d009da05-0049-4d15-a53a-9602e02c2c49.png)
 
