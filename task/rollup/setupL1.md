@@ -18,7 +18,7 @@ cat go.mod | grep "github.com/cosmos/cosmos-sdk" | awk '{print $2}' | awk -F: '{
 # Edit Cosmos-SDK appchain to be Cosmos SDK rollup (Suppose $SDK_VERSION=v0.46.7)
 ```
 cd sei-chain
-go mod edit -replace github.com/cosmos/cosmos-sdk=github.com/rollkit/cosmos-sdk@vv0.46.7-rollkit-v0.7.3-no-fraud-proofs
+go mod edit -replace github.com/cosmos/cosmos-sdk=github.com/rollkit/cosmos-sdk@v0.46.7-rollkit-v0.7.3-no-fraud-proofs
 go mod edit -replace github.com/tendermint/tendermint=github.com/celestiaorg/tendermint@v0.34.22-0.20221202214355-3605c597500d
 go mod tidy
 go mod download
