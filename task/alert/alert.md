@@ -1,4 +1,4 @@
-###Simple instructions to set up a notification system that sends node information and tips to Telegram Bot . Take for example celestia-light
+**Guide to set up a notification system that sends node information to Telegram Bot . Take for example celestia-light**
 # Create Telegram bot
 - Using [@BotFather](https://t.me/BotFather) go to /newbot to create your BOT, then store HTTP API of your BOT carefully
 ![image](https://user-images.githubusercontent.com/80441573/194982631-aea4b52c-33fe-475c-b6f5-50f9f6abd06c.png)
@@ -30,9 +30,6 @@ if alert and your node are in one machine YOUR_RPC="http://127.0.0.1:YOUR_RPC_PO
 
 # set CEL_NODEID
 example : CEL_NODEID="12D3KooWK4GsbLLDPV8KPeAP1kma8ebfF2ZPomp8JMYcbXBL6ZXt"
-
-# Select a public trusted RPC as standard node to compare
-example : TRUSTED_RPC="https://rpc-blockspacerace.pops.one"
 
 # name the alert string
 example : YOUR_NODE_NAME="celestia-light"
