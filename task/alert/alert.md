@@ -20,9 +20,9 @@ source $HOME/.bash_profile
 mkdir $HOME/.alert-tele/ && cd $HOME/.alert-tele/
 wget -O alert.sh https://raw.githubusercontent.com/thonguyen14/Celestia/main/task/alert/alert.sh
 ```
-# Edit alert-tele.sh file following your chain
+# Edit alert.sh file following your chain
 ```
-vi $HOME/.alert-tele/alert-tele.sh
+vi $HOME/.alert-tele/alert.sh
 ```
 ```
 # If alert script and your node are in different machine, you have to expose your RPC node to public internet. then replace YOUR_RPC="http://YOUR_NODE_IP:YOUR_RPC_PORT"
