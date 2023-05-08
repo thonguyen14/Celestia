@@ -45,3 +45,5 @@ crontab -e -u root
 * * * * *  /bin/bash $HOME/.alert-tele/alert.sh
 ```
 - Stop your node, then check Telegram Bot
+
+![image](https://user-images.githubusercontent.com/80441573/236758715-f9f1cfac-b735-4c33-9086-457f04dc8038.png)
