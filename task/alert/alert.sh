@@ -28,70 +28,53 @@ ip=$(wget -qO- eth0.me)
 touch $LOG_FILE
 
 # Collect status of node
-DA_BLOCK_HEIGHT=$(curl https://rpc-blockspacerace.pops.one/block | jq -r '.result.block.header.height')
-STATUS=$(curl -s https://leaderboard.celestia.tools/api/v1/nodes/$CEL_NODEID  | jq)
-CATCHING_UP=$(echo $STATUS | jq '.result.sync_info.catching_up')
-LATEST_BLOCK=$(echo $STATUS | jq '.result.sync_info.latest_block_height' | xargs )
-VOTING_POWER=$(echo $STATUS | jq '.result.validator_info.voting_power' | xargs )
-ADDRESS=$(echo $STATUS | jq '.result.validator_info.address' | xargs )
+STATUS=$(curl -s https://leaderboard.celestia.tools/api/v1/nodes/$CEL_NODEID)
+network_height=$(echo $STATUS | jq .network_height)
+Uptime_Score=$(echo $STATUS | jq .uptime)
+Node_Uptime=$(echo $STATUS | jq .last_accumulative_node_runtime_counter_in_seconds)
+Head=$(echo $STATUS | jq .head )
+Total_Sampled_Headers=$(echo $STATUS | jq .das_total_sampled_headers )
+PayForBlob_Count=$(echo $STATUS | jq .pfb_count )
 
 # Collect node version
-NODE_VERSION=$(curl -s "$NODE_RPC/abci_info" | jq .result.response.version | tr -d \\ | tr -d '"')
-TRUSTED_RPC_VERSION=$(curl -s "$PUBLIC_TRUSTED_RPC//abci_info" --connect-timeout 20 | jq .result.response.version | tr -d \\ | tr -d '"')
-
-# Collect validator status
-VAL_STATUS=$(curl -s $GURU_API | jq .jailed)
+NODE_VERSION=$(celestia version)
 
 source $LOG_FILE
-echo 'LAST_BLOCK="'"$LATEST_BLOCK"'"' > $LOG_FILE
-echo 'LAST_POWER="'"$VOTING_POWER"'"' >> $LOG_FILE
+echo 'network_height="'"$network_height"'"' > $LOG_FILE
+echo 'Uptime_Score="'"$Uptime_Score"'"' >> $LOG_FILE
+echo 'Total_Sampled_Headers="'"$Total_Sampled_Headers"'"' >> $LOG_FILE
 
 
 source $HOME/.bash_profile
-curl -s "$NODE_RPC/status"> /dev/null
+curl -s "$CEL_API"> /dev/null
 if [[ $? -ne 0 ]]; then
-    MSG="Node $NODE_NAME with $ip is stopped!!!.To restart run command : sudo systemctl restart haqqd"
+    MSG="Node $NODE_NAME with $ip is stopped!!!.To restart run command : sudo systemctl restart celestia-light"
     SEND=$(curl -s -X POST -H "Content-Type:multipart/form-data" "https://api.telegram.org/bot$TG_API/sendMessage?chat_id=$TG_ID&text=$MSG"); exit 1
 fi
 
-if [ "$NODE_VERSION" != "$TRUSTED_RPC_VERSION" ]; then
-    MSG="Node $NODE_NAME with $ip Correct version is $TRUSTED_RPC_VERSION!!!. pleasure Upgrade following guide in the link https://github.com/thonguyen14/Haqqd/tree/main/upgrade/355555"
+if [ "$NODE_VERSION" != "$NODE_VERSION" ]; then
+    MSG="Node $NODE_NAME with $ip Correct version !!!. pleasure Upgrade following guide in the link https://discord.com/channels/638338779505229824/1077540791095939082"
     SEND=$(curl -s -X POST -H "Content-Type:multipart/form-data" "https://api.telegram.org/bot$TG_API/sendMessage?chat_id=$TG_ID&text=$MSG");
 fi
 
-if [[ $VAL_STATUS = "true" ]]; then
-    MSG=" Node $NODE_NAME with $ip is jailed !!!.To unjail , run command : haqqd tx slashing unjail --broadcast-mode=block --from=<wallet-name> --chain-id=haqq_54211-2 --gas=auto -y"
+if [[ $Uptime_Score = "<95" ]]; then
+    MSG=" Node $NODE_NAME with $ip is uptime warning !!!.To check your node 
     SEND=$(curl -s -X POST -H "Content-Type:multipart/form-data" "https://api.telegram.org/bot$TG_API/sendMessage?chat_id=$TG_ID&text=$MSG");
 fi
 
-if [[ $LAST_POWER -ne $VOTING_POWER ]]; then
-    DIFF=$(($VOTING_POWER - $LAST_POWER))
-    if [[ $DIFF -gt 0 ]]; then
-        DIFF="%2B$DIFF"
-    fi
-    MSG="Node $NODE_NAME with $ip has changed voting power: $DIFF%0A($LAST_POWER -> $VOTING_POWER)"
+if [[ $Head = "$Head" ]]; then
+    MSG="Node $NODE_NAME with $ip got at $Head"
     SEND=$(curl -s -X POST -H "Content-Type:multipart/form-data" "https://api.telegram.org/bot$TG_API/sendMessage?chat_id=$TG_ID&text=$MSG");
 fi
 
-if [[ $LAST_BLOCK -ge $LATEST_BLOCK ]]; then
-    MSG="Node $NODE_NAME with $ip got probably stuck at block $LATEST_BLOCK"
+if [[ $Total_Sampled_Headers = "$Total_Sampled_Headers" ]]; then
+    MSG="Node $NODE_NAME with $ip is got a $Total_Sampled_Headers
     SEND=$(curl -s -X POST -H "Content-Type:multipart/form-data" "https://api.telegram.org/bot$TG_API/sendMessage?chat_id=$TG_ID&text=$MSG");
 fi
 
-if [[ $VOTING_POWER -lt 1 ]]; then
-    MSG="Node $NODE_NAME with $ip is inactive\jailed. Voting power $VOTING_POWER . CHECK JAIL or TOMBSTONE STATUS :  haqqd query slashing signing-info (haqqd tendermint show-validator)      CHECK ACTIVE/INACTIVE STATUS : haqqd query staking validators -oj --limit=2000 | jq '.validators[] | select(.operator_address=="VALIDATOR_ADDR").status' "
+if [[ $PayForBlob_Count = "$PayForBlob_Count" ]]; then
+    MSG=" Node $NODE_NAME with $ip is submited $PayForBlob_Count transactions
     SEND=$(curl -s -X POST -H "Content-Type:multipart/form-data" "https://api.telegram.org/bot$TG_API/sendMessage?chat_id=$TG_ID&text=$MSG");
-fi
-
-if [[ $CATCHING_UP = "true" ]]; then
-    MSG=" Node $NODE_NAME with $ip is not full synched, catching up. $LATEST_BLOCK -> $REAL_BLOCK"
-    SEND=$(curl -s -X POST -H "Content-Type:multipart/form-data" "https://api.telegram.org/bot$TG_API/sendMessage?chat_id=$TG_ID&text=$MSG");
-fi
-
-if [[ $REAL_BLOCK -eq 0 ]]; then
-    MSG="Can't connect to $PUBLIC_TRUSTED_RPC"
-    SEND=$(curl -s -X POST -H "Content-Type:multipart/form-data" "https://api.telegram.org/bot$TG_API/sendMessage?chat_id=$TG_ID&text=$MSG");
-
 fi
 
 touch $LOG_SESSION
