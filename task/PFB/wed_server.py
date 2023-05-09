@@ -1,7 +1,7 @@
 from flask import Flask, render_template, request
 import os
 
-web_server = Flask(__name__, template_folder='dashboard')
+web_server = Flask(__name__, template_folder='/root/wed_pfb/template/')
 
 @web_server.route('/')
 def index():
