@@ -11,12 +11,14 @@ python3 -m pip install Flask==1.1.2
 ```
 # dowload
 ```
-wget https://raw.githubusercontent.com/thonguyen14/Celestia/main/task/PFB/uitool.py && https://raw.githubusercontent.com/thonguyen14/Celestia/main/task/PFB/pfb.sh
+wget uitool.py https://raw.githubusercontent.com/thonguyen14/Celestia/main/task/PFB/uitool.py
+wget pfb.sh https://raw.githubusercontent.com/thonguyen14/Celestia/main/task/PFB/pfb.sh
 mkdir $HOME/payforblob_wed && cd $HOME/payforblob_wed
 wget https://raw.githubusercontent.com/thonguyen14/Celestia/main/task/PFB/index.html
 mkdir $HOME/payforblob_wed/templates
-wget https://raw.githubusercontent.com/thonguyen14/Celestia/main/task/PFB/uitool.html
 cp $HOME/payforblob_wed/index.html $HOME/payforblob_wed/templates/
+wget uitool.html https://raw.githubusercontent.com/thonguyen14/Celestia/main/task/PFB/uitool.html
+
 ```
 # run wed
 ```
