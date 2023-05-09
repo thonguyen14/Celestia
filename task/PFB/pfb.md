@@ -22,6 +22,6 @@ cp $HOME/wed_pfb/index.html $HOME/wed_pfb/templates/
 # run wed
 ```
 cd
-screen -S payforblob_wed
+screen -S wed_pfb
 python3 wed_server.py
 ```
