@@ -18,10 +18,6 @@ NODE_NAME="celestia-light"
 
 source
 
-# Public trusted node RPC address
-# PUBLIC_TRUSTED_RPC="https://rpc-blockspacerace.pops.one"
-PUBLIC_TRUSTED_RPC="https://rpc-blockspacerace.pops.one"
-
 # Your public IP
 ip=$(wget -qO- eth0.me)
 
@@ -41,8 +37,7 @@ NODE_VERSION=$(celestia version)
 
 source $LOG_FILE
 echo 'network_height="'"$network_height"'"' > $LOG_FILE
-echo 'Uptime_Score="'"$Uptime_Score"'"' >> $LOG_FILE
-echo 'Total_Sampled_Headers="'"$Total_Sampled_Headers"'"' >> $LOG_FILE
+echo 'Head="'"$Head"'"' >> $LOG_FILE
 
 
 source $HOME/.bash_profile
@@ -50,11 +45,6 @@ curl -s "$CEL_API"> /dev/null
 if [[ $? -ne 0 ]]; then
     MSG="Node $NODE_NAME with $ip is stopped!!!.To restart run command : sudo systemctl restart celestia-light"
     SEND=$(curl -s -X POST -H "Content-Type:multipart/form-data" "https://api.telegram.org/bot$TG_API/sendMessage?chat_id=$TG_ID&text=$MSG"); exit 1
-fi
-
-if [ "$NODE_VERSION" != "$NODE_VERSION" ]; then
-    MSG="Node $NODE_NAME with $ip Correct version !!!. pleasure Upgrade following guide in the link https://discord.com/channels/638338779505229824/1077540791095939082"
-    SEND=$(curl -s -X POST -H "Content-Type:multipart/form-data" "https://api.telegram.org/bot$TG_API/sendMessage?chat_id=$TG_ID&text=$MSG");
 fi
 
 if [[ $Uptime_Score = "<95" ]]; then
