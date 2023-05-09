@@ -14,7 +14,7 @@ python3 -m pip install Flask==1.1.2
 wget wed_server.py https://raw.githubusercontent.com/thonguyen14/Celestia/main/task/PFB/wed_server.py
 wget pfb.sh https://raw.githubusercontent.com/thonguyen14/Celestia/main/task/PFB/pfb.sh
 mkdir $HOME/wed_pfb && cd $HOME/wed_pfb
-wget https://raw.githubusercontent.com/thonguyen14/Celestia/main/task/PFB/index.html
+wget index.html https://raw.githubusercontent.com/thonguyen14/Celestia/main/task/PFB/index.html
 mkdir $HOME/wed_pfb/templates
 cp $HOME/wed_pfb/index.html $HOME/wed_pfb/templates/
 
