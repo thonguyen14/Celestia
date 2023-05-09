@@ -11,18 +11,17 @@ python3 -m pip install Flask==1.1.2
 ```
 # dowload
 ```
-wget uitool.py https://raw.githubusercontent.com/thonguyen14/Celestia/main/task/PFB/uitool.py
+wget wed_server.py https://raw.githubusercontent.com/thonguyen14/Celestia/main/task/PFB/wed_server.py
 wget pfb.sh https://raw.githubusercontent.com/thonguyen14/Celestia/main/task/PFB/pfb.sh
-mkdir $HOME/payforblob_wed && cd $HOME/payforblob_wed
+mkdir $HOME/wed_pfb && cd $HOME/wed_pfb
 wget https://raw.githubusercontent.com/thonguyen14/Celestia/main/task/PFB/index.html
-mkdir $HOME/payforblob_wed/templates
-cp $HOME/payforblob_wed/index.html $HOME/payforblob_wed/templates/
-wget uitool.html https://raw.githubusercontent.com/thonguyen14/Celestia/main/task/PFB/uitool.html
+mkdir $HOME/wed_pfb/templates
+cp $HOME/wed_pfb/index.html $HOME/wed_pfb/templates/
 
 ```
 # run wed
 ```
 cd
 screen -S payforblob_wed
-python3 web_server.py
+python3 wed_server.py
 ```
