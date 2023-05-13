@@ -84,7 +84,8 @@ echo $DA_BLOCK_HEIGHT
 ```
 seid start --rollkit.aggregator true --rollkit.block_time 2.35s --rollkit.da_block_time 2.35s --rollkit.da_layer celestia --rollkit.da_config='{"base_url":"http://localhost:26659","timeout":60000000000,"fee":100,"gas_limit":100000}' --rollkit.namespace_id $NAMESPACE_ID  --rollkit.da_start_height $DA_BLOCK_HEIGHT --p2p.laddr "0.0.0.0:26656" --p2p.seed_mode --log_level debug
 ```
-*If DA node and Rollup sequencer are on different server change http://localhost:26659 to http://YOUR_PUB_IP:26659*
+*#If DA node and Rollup sequencer are on different server change http://localhost:26659 to http://YOUR_PUB_IP:26659*
+
 **And this is the result . PFB transactions submitted to celestia**
 ![image](https://user-images.githubusercontent.com/80441573/235969362-12a03856-5bd8-46b2-99c4-b7fbe38a62a2.png)
 
