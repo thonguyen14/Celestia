@@ -34,8 +34,7 @@ KEY_NAME_2=key2
 DENOM="usei"
 CHAINFLAG="--chain-id ${CHAIN_ID}"
 TOKEN_AMOUNT="10000000000000000000000000${DENOM}"
-STAKING_AMOUNT="10000000${DENOM}"
-HOME_DIR="/root/.sei" 
+STAKING_AMOUNT="10000000${DENOM}" 
 ```
 - ***reset any existing genesis/chain data***
 ```
@@ -52,7 +51,7 @@ seid keys add $KEY_NAME_2 --keyring-backend test
 ```
 - ***set DENOM go to genesis file***
 ```
-sed -i.bak -e "s|\"stake\"|\"$DENOM\"|g" ${HOME_DIR}/config/genesis.json
+sed -i.bak -e "s|\"stake\"|\"$DENOM\"|g" /root/.sei/config/genesis.json
 ```
 - ***add these as genesis accounts***
 ```
