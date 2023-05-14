@@ -6,13 +6,13 @@ sudo apt install -y build-essential libssl-dev libffi-dev python3-dev
 python3 -V
 sudo apt install -y python3-pip
 pip install flask
-#có thể chỉ định version cụ thể cho flask bằng lệnh sau
-python3 -m pip install Flask==1.1.2
-```
+
 #uninstall và cài lại flask
-```
 pip uninstall flask
 pip install flask
+
+#có thể chỉ định version cụ thể cho flask ,ex:
+python3 -m pip install Flask==1.1.2
 ```
 # dowload
 ```
