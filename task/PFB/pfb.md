@@ -6,6 +6,7 @@ sudo apt install -y build-essential libssl-dev libffi-dev python3-dev
 python3 -V
 sudo apt install -y python3-pip
 pip install flask
+flask --version
 
 #uninstall và cài lại flask
 pip uninstall flask
