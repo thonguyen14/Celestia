@@ -8,11 +8,11 @@ sudo apt install -y python3-pip
 pip install flask
 flask --version
 
-#uninstall và cài lại flask
+# lệnh uninstall và cài lại flask
 pip uninstall flask
 pip install flask
 
-#có thể chỉ định version cụ thể cho flask ,ex:
+#có thể chỉ định version cụ thể cho flask băng lệnh  ,ex:
 python3 -m pip install Flask==1.1.2
 ```
 # dowload
