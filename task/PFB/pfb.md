@@ -9,11 +9,16 @@ pip install flask
 #có thể chỉ định version cụ thể cho flask bằng lệnh sau
 python3 -m pip install Flask==1.1.2
 ```
+#uninstall và cài lại flask
+```
+pip uninstall flask
+pip install flask
+```
 # dowload
 ```
+mkdir $HOME/wed_pfb && cd $HOME/wed_pfb
 wget wed_server.py https://raw.githubusercontent.com/thonguyen14/Celestia/main/task/PFB/wed_server.py
 wget pfb.sh https://raw.githubusercontent.com/thonguyen14/Celestia/main/task/PFB/pfb.sh
-mkdir $HOME/wed_pfb && cd $HOME/wed_pfb
 wget index.html https://raw.githubusercontent.com/thonguyen14/Celestia/main/task/PFB/index.html
 mkdir $HOME/wed_pfb/templates
 cp $HOME/wed_pfb/index.html $HOME/wed_pfb/templates/
