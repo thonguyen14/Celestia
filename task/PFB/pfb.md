@@ -1,4 +1,4 @@
-#install py3 and pip
+# install py3 and pip
 ```
 sudo apt update
 sudo apt -y upgrade
