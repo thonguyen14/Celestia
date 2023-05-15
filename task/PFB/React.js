@@ -12,6 +12,7 @@ export const BLOCKSPACERACE_PARAMS = {
 }
 
 <AddNetworkKeplr params={BLOCKSPACERACE_PARAMS}/>
+  
   async function add() {
     if (!window.keplr) {
         alert("Please install keplr extension");
