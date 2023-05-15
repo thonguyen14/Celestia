@@ -2,6 +2,16 @@ import React from 'react'
 import styles from './Keplr.module.css'
 
 export default function AddNetworkKeplr({params}){
+  import '@site/src/components/AddNetworkKeplr'
+
+export const BLOCKSPACERACE_PARAMS = {
+  chainId: 'blockspacerace',
+  chainName: 'Blockspace Race Testnet',
+  rpc: 'https://rpc-blockspacerace.pops.one',
+  rest: 'https://api-blockspacerace.pops.one'
+}
+
+<AddNetworkKeplr params={BLOCKSPACERACE_PARAMS}/>
   async function add() {
     if (!window.keplr) {
         alert("Please install keplr extension");
