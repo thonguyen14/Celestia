@@ -1,7 +1,8 @@
 import React from 'react'
 import styles from './Keplr.module.css'
 
-export default function AddNetworkKeplr({params}){
+export default function AddNetworkKeplr({params})
+{
   import '@site/src/components/AddNetworkKeplr'
 
 export const BLOCKSPACERACE_PARAMS = {
